@@ -1,0 +1,6 @@
+{:deps {com.biffweb/task-runner       {:git/url "https://github.com/jacobobryant/biff"
+                                       :git/sha "bb1feb6f68f42ac3faa02c8c15b31aa21037dc63"
+                                       :deps/root "libs/task-runner"}
+        ai.unifica.lab/config {:local/root "../config"}
+        babashka/fs {:mvn/version "0.5.20"}
+        babashka/process {:mvn/version "0.5.22"}}}

@@ -1,0 +1,9 @@
+{:deps
+ {com.amazon.sellingpartnerapi/sellingpartnerapi-aa-java {:mvn/version "2.0"}
+  javax.annotation/javax.annotation-api {:mvn/version "1.3.2"}
+  io.swagger/swagger-annotations {:mvn/version "1.5.24"}
+  com.squareup.okhttp/okhttp {:mvn/version "2.7.5"}
+  com.squareup.okhttp/logging-interceptor {:mvn/version "2.7.5"}
+  com.google.code.gson/gson {:mvn/version "2.8.1"}
+  io.gsonfire/gson-fire {:mvn/version "1.8.3"}
+  org.threeten/threetenbp {:mvn/version "1.4.1"}}}

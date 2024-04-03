@@ -1,0 +1,7 @@
+{:quarto
+ {:format
+  {:html
+   {:theme [:materia "resources/custom.scss"]
+    :code-fold true }
+   :revealjs
+   {:theme :league}}}}

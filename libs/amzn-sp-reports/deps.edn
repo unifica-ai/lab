@@ -1,0 +1,15 @@
+{:paths ["src" "target/classes"]
+ :deps/prep-lib {:alias :build
+                 :fn compile
+                 :ensure "target/classes"}
+ :deps
+          {ai.unifica/plumbing {:local/root "../plumbing"}
+           com.amzn/sp {:local/root "../amzn-sp"}
+           cheshire/cheshire {:mvn/version "5.12.0"}
+           io.swagger/swagger-java-client {:local/root "java"}
+           junit/junit {:mvn/version "4.13.2"}}
+ :aliases
+ {;; Run with clj -T:build function-in-build
+  :build {:deps
+          {io.github.clojure/tools.build {:git/tag "v0.9.6" :git/sha "8e78bcc"}}
+          :ns-default build}}}

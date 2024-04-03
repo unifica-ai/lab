@@ -1,0 +1,75 @@
+---
+format:
+  html: {toc: true, toc-depth: 4, theme: spacelab, output-file: terms.html}
+code-block-background: true
+include-in-header: {text: '<link rel = "icon" href = "data:," />'}
+
+---
+```{=html}
+<img alt="Unifica logo" src="https://raw.githubusercontent.com/unifica-ai/home/main/static/img/logo/logo.svg" style="width:200px;" />
+```
+
+# Descargo de responsabilidad de datos
+
+## 1. Acceso y Uso
+
+Los datos proporcionados por Unifica Tu Data ("Datos") están destinados a su uso
+personal, de investigación o comercial. Se le otorga una licencia no exclusiva e
+intransferible para acceder y utilizar los Datos de acuerdo con estos términos.
+
+## 2. Precisión e integridad
+
+Si bien Unifica Tu Data se esfuerza por proporcionar Datos precisos y completos,
+los Datos se proporcionan "tal cual" y sin garantías de ningún tipo, expresas o
+implícitas. Unifica Tu Data no garantiza la exactitud, integridad, confiabilidad
+o actualidad de los Datos.
+
+## 3. Datos de terceros
+
+Los Datos pueden incluir información obtenida de fuentes de terceros. Unifica Tu
+Data no respalda ni garantiza la exactitud o integridad de dicha información de
+terceros.
+
+## 4. Usos prohibidos
+
+Tiene prohibido utilizar los Datos para cualquier fin que sea:
+
+- Ilegal o viola cualquier ley o reglamento aplicable.
+- Infrinja los derechos de propiedad intelectual de cualquier tercero.
+- Dañino, amenazante, abusivo, acosador, difamatorio, vulgar, obsceno, odioso o discriminatorio.
+- Con la intención de engañar a otros. Se utiliza para crear o promover software malicioso u otro contenido dañino.
+
+
+## 5. Modificaciones
+
+No se le permite modificar, realizar ingeniería inversa, descompilar,
+desensamblar o intentar derivar el código fuente de los Datos.
+
+## 6. Exención de responsabilidad
+
+Unifica Tu Data no será responsable de ningún daño que surja de el uso de los
+Datos, incluidos, entre otros, daños directos, indirectos, incidentales,
+consecuentes o punitivos.
+
+## 7. Terminación
+
+Unifica Tu Data se reserva el derecho de suspender o cancelar su acceso a los
+Datos en cualquier momento, con o sin previo aviso, por cualquier violación de
+estos términos.
+
+##  8. Ley aplicable
+
+Estos términos se regirán e interpretarán de acuerdo con las leyes del Estado de
+Guatemala sin tener en cuenta sus disposiciones sobre conflicto de leyes.
+
+## 9. Acuerdo completo
+
+Estos términos constituyen el acuerdo completo entre el usuario y Unifica Tu
+Data con respecto a su acceso y uso de los Datos.
+
+## 10. Actualización
+
+Unifica Tu Data puede actualizar estos términos en cualquier momento publicando
+los términos revisados en su sitio web. Al continuar accediendo o utilizando los
+Datos después de que se publiquen los términos actualizados, usted acepta estar
+sujeto a los términos revisados.

@@ -1,0 +1,11 @@
+{:paths ["src" "resources" "notebooks"]
+ :deps
+ {ai.unifica/lab {:local/root ".."}
+  ai.unifica.gcloud/bigquery {:local/root "../libs/gcloud-bigquery"}}
+ :aliases
+ {:dev {:extra-deps {ai.unifica.lab/tasks {:local/root "../libs/tasks"}}
+        :jvm-opts ["-XX:-OmitStackTraceInFastThrow"
+                   "-XX:+CrashOnOutOfMemoryError"
+                   "-Dlab.env.LAB_PROFILE=dev"]
+        :extra-paths ["dev"]
+        :main-opts ["-m" "com.biffweb.task-runner" "tasks/tasks"]}}}

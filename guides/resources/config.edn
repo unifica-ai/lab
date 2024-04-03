@@ -1,0 +1,2 @@
+{:gcloud/project-id #lab/env GOOGLE_CLOUD_PROJECT
+ :example-secret #lab/secret EXAMPLE_SECRET }

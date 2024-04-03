@@ -1,0 +1,15 @@
+/.clj-kondo/
+.cpcache/
+/.lsp/
+.nrepl-port
+/csv/
+/db/
+.calva/
+/secrets.env
+/java/
+*.env
+*.csv*
+*.tsv*
+.clay.html
+/process.yml
+/result
