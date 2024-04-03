@@ -1,0 +1,14 @@
+{:paths ["src" "resources" "notebooks"]
+ :deps
+ {ai.unifica/lab {:local/root "../.."}}
+ :aliases
+ {:dev {:extra-deps {ai.unifica.lab/tasks {:local/root "../../libs/tasks"}}
+        :extra-paths ["dev"]
+        :jvm-opts ["-XX:-OmitStackTraceInFastThrow"
+                   "-XX:+CrashOnOutOfMemoryError"
+                   "-Dlab.env.LAB_PROFILE=dev"]
+        :main-opts ["-m" "com.biffweb.task-runner" "tasks/tasks"]}
+  :prod {:jvm-opts ["-XX:-OmitStackTraceInFastThrow"
+                    "-XX:+CrashOnOutOfMemoryError"
+                    "-Dlab.env.LAB_PROFILE=prod"]
+         :main-opts ["-m" "com.example"]}}}

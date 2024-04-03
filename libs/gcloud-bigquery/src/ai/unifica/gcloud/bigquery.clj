@@ -121,15 +121,3 @@
   (datafy [o]
     {:gcloud.bigquery.job/status (-> o .getJobId .getJob)
      :gcloud.bigquery.result/total-rows (-> o .getTotalRows)}))
-
-(comment
-
-  (let [ds "amazon_sp_reports"
-        tbl "st_sales_and_traffic"
-        uri "https://storage.cloud.google.com/unifica-luum-datalake/a/luum/2024/03/sales-and-traffic/amz-sp-sales-and-traffic-report-2024-03-12.csv"
-        schema (schema (vector {:name "traffic_by_asin_mobile_app_session_percentage_b2b", :type "NUMERIC"} {:name "sales_by_asin_units_ordered_b2b", :type "INTEGER"} {:name "traffic_by_asin_unit_session_percentage", :type "NUMERIC"} {:name "traffic_by_asin_page_views_b2b", :type "INTEGER"} {:name "traffic_by_asin_page_views_percentage_b2b", :type "NUMERIC"} {:name "traffic_by_asin_browser_page_views", :type "INTEGER"} {:name "traffic_by_asin_buy_box_percentage", :type "NUMERIC"} {:name "traffic_by_asin_mobile_app_page_views_percentage", :type "NUMERIC"} {:name "traffic_by_asin_browser_session_percentage", :type "NUMERIC"} {:name "traffic_by_asin_unit_session_percentage_b2b", :type "NUMERIC"} {:name "traffic_by_asin_session_percentage_b2b", :type "NUMERIC"} {:name "traffic_by_asin_browser_session_percentage_b2b", :type "NUMERIC"} {:name "traffic_by_asin_page_views", :type "INTEGER"} {:name "traffic_by_asin_mobile_app_session_percentage", :type "NUMERIC"} {:name "traffic_by_asin_mobile_app_page_views", :type "INTEGER"} {:name "traffic_by_asin_browser_sessions_b2b", :type "INTEGER"} {:name "traffic_by_asin_browser_page_views_percentage_b2b", :type "NUMERIC"} {:name "traffic_by_asin_page_views_percentage", :type "NUMERIC"} {:name "traffic_by_asin_mobile_app_page_views_b2b", :type "INTEGER"} {:name "traffic_by_asin_browser_sessions", :type "INTEGER"} {:name "sales_by_asin_ordered_product_sales_amount", :type "NUMERIC"} {:name "traffic_by_asin_mobile_app_sessions", :type "INTEGER"} {:name "traffic_by_asin_buy_box_percentage_b2b", :type "NUMERIC"} {:name "traffic_by_asin_mobile_app_page_views_percentage_b2b", :type "NUMERIC"} {:name "sales_by_asin_ordered_product_sales_b2b_currency_code", :type "STRING"} {:name "traffic_by_asin_sessions_b2b", :type "INTEGER"} {:name "sales_by_asin_total_order_items_b2b", :type "INTEGER"} {:name "sales_by_asin_total_order_items", :type "INTEGER"} {:name "traffic_by_asin_browser_page_views_percentage", :type "NUMERIC"} {:name "traffic_by_asin_mobile_app_sessions_b2b", :type "INTEGER"} {:name "sales_by_asin_units_ordered", :type "INTEGER"} {:name "child_asin", :type "STRING"} {:name "parent_asin", :type "STRING"} {:name "sales_by_asin_ordered_product_sales_currency_code", :type "STRING"} {:name "traffic_by_asin_session_percentage", :type "NUMERIC"} {:name "traffic_by_asin_sessions", :type "INTEGER"} {:name "sales_by_asin_ordered_product_sales_b2b_amount", :type "NUMERIC"} {:name "traffic_by_asin_browser_page_views_b2b", :type "INTEGER"} {:name "date", :type "DATE"} {:name "marketplace_id", :type "STRING"}))
-        svc (service {:gcloud/project-id "luum-413618"})]
-    (def schema* schema)
-    (load {:gcloud.bigquery/service svc} ds tbl uri schema))
-
-)

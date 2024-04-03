@@ -16,15 +16,9 @@
 ;; Adapted from this talk:
 (md "[Link](https://github.com/ladymeyy/tablecloth-talks-and-workshop/tree/main)")
 
-;; **bq-project**
-;;
-;; El **proyecto** en Google Cloud Platform (GCP)
-(def bq-project "luum-413618")
-
 ;; **bq-dataset**
 ;;
-;; El [dataset](https://cloud.google.com/bigquery/docs/datasets-intro) que
-;; contiene la información de Luum para esta fuente en particular
+;; El [dataset](https://cloud.google.com/bigquery/docs/datasets-intro)
 (def bq-dataset "pokemons")
 
 (defonce ds-pokemon

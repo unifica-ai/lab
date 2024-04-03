@@ -1,0 +1,13 @@
+{
+ ;; General
+ :acct/name "example"
+ :acct/time-zone "-05"
+
+ :lab.nrepl/port #or [#lab/env NREPL_PORT "7888"]
+ :lab.nrepl/args ["--port" #ref [:lab.nrepl/port]
+                  "--middleware" "[cider.nrepl/cider-middleware,refactor-nrepl.middleware/wrap-refactor]"]
+
+ :lab.tasks/main-ns "com.example"
+ :lab.tasks/server #lab/env DOMAIN
+ :lab.tasks/deploy-untracked-files ["config.env" "gcloud-sa.json"]
+ }
