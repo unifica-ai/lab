@@ -1,8 +1,8 @@
 {:paths ["src" "resources" "notebooks"]
  :deps
- {ai.unifica/lab {:local/root "../.."}}
+ {ai.unifica/lab {:local/root ".."}}
  :aliases
- {:dev {:extra-deps {ai.unifica.lab/tasks {:local/root "../../libs/tasks"}}
+ {:dev {:extra-deps {ai.unifica.lab/tasks {:local/root "../libs/tasks"}}
         :extra-paths ["dev"]
         :jvm-opts ["-XX:-OmitStackTraceInFastThrow"
                    "-XX:+CrashOnOutOfMemoryError"

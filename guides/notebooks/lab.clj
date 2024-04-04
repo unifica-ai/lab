@@ -1,4 +1,4 @@
-(ns basic
+(ns lab
   (:require
    [guides.lab :as lab]
    [ai.unifica.lab.notebooks :refer [md logo]]))

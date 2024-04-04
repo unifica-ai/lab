@@ -3,11 +3,12 @@
   (:require
    [clojure.string :as str]
    [tablecloth.api :as tc]
-   [clojure.core.protocols :as p])
+   [clojure.core.protocols :as p]
+   [plumbing.core :refer [?>]])
   (:import
    (com.google.cloud RetryOption)
    (com.google.cloud.bigquery
-    BigQuery$JobOption
+    BigQuery$JobOption BigQuery$TableOption
     BigQueryOptions
     QueryJobConfiguration
     CsvOptions
@@ -30,15 +31,37 @@
   (cmd (service ctx)))
 
 (defn query
-  "Executes a query in BigQuery"
-  [ctx query]
-  (with-service ctx
-    (fn [service]
-      (let [^QueryJobConfiguration query-config
-            (-> (QueryJobConfiguration/newBuilder query)
-                .build)
-            opts (into-array BigQuery$JobOption [])]
-        (.query service query-config opts)))))
+  "Executes a query in BigQuery.
+  Options:
+
+  * dry-run: (default false) do not execute
+
+  See also:
+
+  https://cloud.google.com/bigquery/docs/samples/bigquery-query-dry-run
+  "
+  ([ctx sql]
+   (query ctx sql {}))
+  ([ctx sql opts]
+   (with-service ctx
+     (fn [service]
+       (let [{:keys [dry-run] :or {dry-run false}} opts
+             ^QueryJobConfiguration query-config
+             (-> (QueryJobConfiguration/newBuilder sql)
+                 (?> dry-run (.setDryRun true))
+                 (?> dry-run (.setUseQueryCache false))
+                 .build)
+             info (JobInfo/of query-config)
+             opts (into-array BigQuery$JobOption [])]
+         (if dry-run
+           (.create service info opts)
+           (.query service query-config opts)))))))
+
+
+(defn table-info
+  "Get table info"
+  [dataset tbl]
+  )
 
 ;; Dataset location: https://msi.nga.mil/api/publications/download?type=view&key=16920959/SFH00000/UpdatedPub150.csv
 ;; (def res (query (str "SELECT * FROM unifica-ai.notebooks.test LIMIT 10")))
@@ -69,7 +92,23 @@
 
 (defn tbl [{:gcloud/keys [project-id]} ds name] (str/join "." [project-id ds name]))
 
-(defn schema
+(defn schema [{:gcloud/keys [project-id] :as ctx} ds name]
+  (with-service ctx
+    (fn [service]
+      (let [tid (TableId/of project-id ds name)
+        tbl (.getTable service tid (into-array BigQuery$TableOption []))
+        def (.getDefinition tbl)
+        schema (.getSchema def)
+        fields (.getFields schema)]
+        (map p/datafy fields)))))
+
+(extend-protocol p/Datafiable
+  com.google.cloud.bigquery.Field
+  (datafy [o]
+    {:name (.getName o)
+     :type (.getType o)}))
+
+(defn -schema
   [m]
   (let [types {"STRING" StandardSQLTypeName/STRING
                "NUMERIC" StandardSQLTypeName/NUMERIC
@@ -79,7 +118,7 @@
     (Schema/of (into-array Field fs))))
 
 (comment
-  (schema [{:name "foo" :type "STRING"}]))
+  (-schema [{:name "foo" :type "STRING"}]))
 
 (defn load
   "Loads a dataset + table from a gs:// uri, with an explicit schema"
@@ -109,15 +148,30 @@
     (merge
      #:gcloud.bigquery.job{:id (-> o .getJobId .getJob)
                            :status (-> o .getStatus .getState .toString)}
-     (let [stats (-> o .getStatistics)]
-       #:google.bigquery.job.stats{:bad-records (.getBadRecords stats)
-                                   :creation-time (.getCreationTime stats)
-                                   :start-time (.getStartTime stats)
-                                   :end-time (.getEndTime stats)
-                                   :output-rows (.getOutputRows stats)}))))
+     (-> o .getStatistics p/datafy))))
+
+(extend-protocol p/Datafiable
+  com.google.cloud.bigquery.JobStatistics$QueryStatistics
+  (datafy [o]
+    #:google.bigquery.job.stats{:partitions-processed (.getTotalPartitionsProcessed o)
+                                :total-processed (.getTotalBytesProcessed o)
+                                :total-billed (.getTotalBytesBilled o)
+
+                                :creation-time (.getCreationTime o)
+                                :start-time (.getStartTime o)
+                                :end-time (.getEndTime o)}))
+
+(extend-protocol p/Datafiable
+  com.google.cloud.bigquery.JobStatistics$LoadStatistics
+  (datafy [o]
+    #:google.bigquery.job.stats{:bad-records (.getBadRecords o)
+                                :creation-time (.getCreationTime o)
+                                :start-time (.getStartTime o)
+                                :end-time (.getEndTime o)
+                                :output-rows (.getOutputRows o)}))
 
 (extend-protocol p/Datafiable
   com.google.cloud.bigquery.TableResult
   (datafy [o]
-    {:gcloud.bigquery.job/status (-> o .getJobId .getJob)
+    {:gcloud.bigquery.job/id (-> o .getJobId .getJob)
      :gcloud.bigquery.result/total-rows (-> o .getTotalRows)}))

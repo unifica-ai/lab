@@ -1,2 +1,4 @@
 {:paths ["src"]
- :deps {com.google.cloud/google-cloud-bigquery {:mvn/version "2.36.0"}}}
+ :deps {scicloj/tablecloth {:mvn/version "7.021"}
+        prismatic/plumbing {:mvn/version "0.6.0"}
+        com.google.cloud/google-cloud-bigquery {:mvn/version "2.36.0"}}}

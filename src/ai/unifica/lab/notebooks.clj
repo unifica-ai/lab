@@ -15,5 +15,5 @@
 
 (def logo (html [:img
  {:style {:width "200px"}
-  :src "https://raw.githubusercontent.com/unifica-ai/home/main/static/img/logo/logo.svg"
+  :src "https://raw.githubusercontent.com/unifica-ai/lab/main/resources/logo.svg"
   :alt "Unifica logo"}]))

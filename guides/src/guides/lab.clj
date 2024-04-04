@@ -1,24 +1,22 @@
 (ns guides.lab
   (:require
-   [ai.unifica.lab.config :as cfg]
-   [ai.unifica.gcloud.bigquery :as bq]))
+   [ai.unifica.lab.config :as cfg]))
 
 (defonce system (atom {}))
 
-(defn use-bigquery [ctx]
-  (let [service (bq/service ctx)]
-    (-> ctx (assoc :gcloud.bigquery/service service))))
-
 (def components
-  [cfg/use-aero
-   use-bigquery])
+  [cfg/use-aero])
 
 (def initial-system {})
 
 (defn start! []
-  (let [new-system (reduce (fn [system component]
+  (let [x #{:lab.tasks}
+        new-system (reduce (fn [system component]
                              (component system))
                            initial-system
                            components)]
     (reset! system new-system)
-    new-system))
+    (-> (filter (fn [[k]] (not (x ((comp keyword namespace) k)))) new-system)
+        (update-vals (fn [v] (cond (fn? v) "******"
+                                   (not (string? v)) "#"
+                                   :else v))))))
