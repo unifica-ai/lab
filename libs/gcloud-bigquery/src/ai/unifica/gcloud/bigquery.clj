@@ -106,7 +106,12 @@
   com.google.cloud.bigquery.Field
   (datafy [o]
     {:name (.getName o)
-     :type (.getType o)}))
+     :type (-> (.getType o) p/datafy)}))
+
+(extend-protocol p/Datafiable
+  com.google.cloud.bigquery.LegacySQLTypeName
+  (datafy [o]
+    (.toString o)))
 
 (defn -schema
   [m]
@@ -156,7 +161,6 @@
     #:google.bigquery.job.stats{:partitions-processed (.getTotalPartitionsProcessed o)
                                 :total-processed (.getTotalBytesProcessed o)
                                 :total-billed (.getTotalBytesBilled o)
-
                                 :creation-time (.getCreationTime o)
                                 :start-time (.getStartTime o)
                                 :end-time (.getEndTime o)}))

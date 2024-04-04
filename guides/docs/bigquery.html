@@ -58,132 +58,50 @@
  :google.bigquery.job.stats/partitions-processed nil,
  :google.bigquery.job.stats/total-processed 0,
  :google.bigquery.job.stats/total-billed 0,
- :google.bigquery.job.stats/creation-time 1712264864955,
+ :google.bigquery.job.stats/creation-time 1712265985136,
  :google.bigquery.job.stats/start-time nil,
  :google.bigquery.job.stats/end-time nil}
-</code></pre></div></div><div style="margin:15px;"><div><p>En este caso, se procesaron 0 bytes porque el query <code>SELECT 1=1</code> no utiliza datos. Para explorar datos, vamos a hacer un ejercicio.</p><h2 id="cual-pokemon-es-huesos?">Cual Pokemon es Huesos?</h2></div></div><div style="margin:15px;"><img src="notebooks/img/huesos.jpg" style="width:200px;"></div><div style="margin:15px;"><div><p>Adaptado de esta <a href="https://github.com/ladymeyy/tablecloth-talks-and-workshop/tree/main">presentacion</a></p><p><strong>bq-dataset</strong></p><p>El <a href="https://cloud.google.com/bigquery/docs/datasets-intro">dataset</a> es una agrupación de tablas y otros elementos en BigQuery. En general se usa un dataset por cada notebook.</p></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(def bq-dataset "pokemons")</code></pre></div></div><div style="margin:15px;"><div><p>Las funciones para retirar data de BigQuery tienen este formato.</p></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(delay (bq/schema @lab/system bq-dataset "pokemons"))</code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure printed-clojure">({:name "abilities",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x5bfcfc42 "STRING"]}
- {:name "against_bug",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_dark",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_dragon",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_electric",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_fairy",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_fight",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_fire",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_flying",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_ghost",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_grass",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_ground",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_ice",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_normal",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_poison",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_psychic",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_rock",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_steel",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "against_water",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "attack",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "base_egg_steps",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "base_happiness",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "base_total",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "capture_rate",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x5bfcfc42 "STRING"]}
- {:name "classfication",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x5bfcfc42 "STRING"]}
- {:name "defense",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "experience_growth",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "height_m",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "hp",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "japanese_name",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x5bfcfc42 "STRING"]}
- {:name "name",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x5bfcfc42 "STRING"]}
- {:name "percentage_male",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "pokedex_number",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "sp_attack",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "sp_defense",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "speed",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "type1",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x5bfcfc42 "STRING"]}
- {:name "type2",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x5bfcfc42 "STRING"]}
- {:name "weight_kg",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7ca96de5 "FLOAT"]}
- {:name "generation",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "is_legendary",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]})
+</code></pre></div></div><div style="margin:15px;"><div><p>En este caso, se procesaron 0 bytes porque el query <code>SELECT 1=1</code> no utiliza datos. Para explorar datos, vamos a hacer un ejercicio.</p><h2 id="cual-pokemon-es-huesos?">Cual Pokemon es Huesos?</h2><p>Huesos es mi perro. Tenemos una base de datos de Pokemons que bajamos de Kaggle, y queremos averiguar cuál Pokemon es.</p></div></div><div style="margin:15px;"><img src="notebooks/img/huesos.jpg" style="width:200px;"></div><div style="margin:15px;"><div><p>Huesos es el Pokemon con igual altura y peso, y que también ha ganado la mayor cantidad de batallas contra otros pokemones.</p><p>Esta sección fue adaptada de esta <a href="https://github.com/ladymeyy/tablecloth-talks-and-workshop/tree/main">presentacion</a>.</p><p><strong>bq-dataset</strong></p><p>El <a href="https://cloud.google.com/bigquery/docs/datasets-intro">dataset</a> es una agrupación de tablas y otros elementos en BigQuery. En general se usa un dataset por cada notebook.</p></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(def bq-dataset "pokemons")</code></pre></div></div><div style="margin:15px;"><div><p>Las funciones para retirar data de BigQuery tienen este formato.</p></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(delay (bq/schema @lab/system bq-dataset "pokemons"))</code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure printed-clojure">({:name "abilities", :type "STRING"}
+ {:name "against_bug", :type "FLOAT"}
+ {:name "against_dark", :type "FLOAT"}
+ {:name "against_dragon", :type "FLOAT"}
+ {:name "against_electric", :type "FLOAT"}
+ {:name "against_fairy", :type "FLOAT"}
+ {:name "against_fight", :type "FLOAT"}
+ {:name "against_fire", :type "FLOAT"}
+ {:name "against_flying", :type "FLOAT"}
+ {:name "against_ghost", :type "FLOAT"}
+ {:name "against_grass", :type "FLOAT"}
+ {:name "against_ground", :type "FLOAT"}
+ {:name "against_ice", :type "FLOAT"}
+ {:name "against_normal", :type "FLOAT"}
+ {:name "against_poison", :type "FLOAT"}
+ {:name "against_psychic", :type "FLOAT"}
+ {:name "against_rock", :type "FLOAT"}
+ {:name "against_steel", :type "FLOAT"}
+ {:name "against_water", :type "FLOAT"}
+ {:name "attack", :type "INTEGER"}
+ {:name "base_egg_steps", :type "INTEGER"}
+ {:name "base_happiness", :type "INTEGER"}
+ {:name "base_total", :type "INTEGER"}
+ {:name "capture_rate", :type "STRING"}
+ {:name "classfication", :type "STRING"}
+ {:name "defense", :type "INTEGER"}
+ {:name "experience_growth", :type "INTEGER"}
+ {:name "height_m", :type "FLOAT"}
+ {:name "hp", :type "INTEGER"}
+ {:name "japanese_name", :type "STRING"}
+ {:name "name", :type "STRING"}
+ {:name "percentage_male", :type "FLOAT"}
+ {:name "pokedex_number", :type "INTEGER"}
+ {:name "sp_attack", :type "INTEGER"}
+ {:name "sp_defense", :type "INTEGER"}
+ {:name "speed", :type "INTEGER"}
+ {:name "type1", :type "STRING"}
+ {:name "type2", :type "STRING"}
+ {:name "weight_kg", :type "FLOAT"}
+ {:name "generation", :type "INTEGER"}
+ {:name "is_legendary", :type "INTEGER"})
 </code></pre></div></div><div style="margin:15px;"><div><p>Entre esas colunas, vamos a escoger solamente algunas por defecto.</p></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(def ds-pokemons-cols ["pokedex_number" "name" "height_m" "weight_kg" "generation" "is_legendary"])</code></pre></div></div><div style="margin:15px;"><div><p>Luego armamos un dataset, extrayendo solo esas columnas de la fuente. Esta es nuestra tabla de "dimensiones".</p></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(defn ds-pokemons
   ([ctx] (ds-pokemons ctx {}))
   ([ctx {:keys [cols] :or {cols ds-pokemons-cols}}]
@@ -198,15 +116,9 @@
                                         :weight_kg :float32})))]
       {:name "pokemons"
        :sql sql
-       :post post})))</code></pre></div></div><div style="margin:15px;"><div><p>Lo mismo con combates. Esta es nuesta tabla de "facts". Contiene batallas etre dos pokemones, y cual fue el ganador.</p></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(delay (bq/schema @lab/system bq-dataset "combats"))</code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure printed-clojure">({:name "First_pokemon",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "Second_pokemon",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "Winner",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]})
+       :post post})))</code></pre></div></div><div style="margin:15px;"><div><p>Lo mismo con combates. Esta es nuesta tabla de "facts". Contiene batallas etre dos pokemones, y cual fue el ganador.</p></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(delay (bq/schema @lab/system bq-dataset "combats"))</code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure printed-clojure">({:name "First_pokemon", :type "INTEGER"}
+ {:name "Second_pokemon", :type "INTEGER"}
+ {:name "Winner", :type "INTEGER"})
 </code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(def ds-combats-cols ["First_pokemon" "Second_pokemon" "Winner"])</code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(defn ds-combats
   "Combats dataset"
   ([ctx] (ds-combats ctx {}))
@@ -219,7 +131,7 @@
      :sql sql})))</code></pre></div></div><div style="margin:15px;"><div><p>Cuando ejecutamos la función, no utilizamos BigQuery. Es mas como un "plan" de que es lo que se va a hacer.</p></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(ds-pokemons @lab/system)</code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure printed-clojure">{:name "pokemons",
  :sql
  "SELECT pokedex_number, name, height_m, weight_kg, generation, is_legendary from `luum-413618.pokemons.pokemons`",
- :post #function[bigquery/ds-pokemons/post--41900]}
+ :post #function[bigquery/ds-pokemons/post--42799]}
 </code></pre></div></div><div style="margin:15px;"><div><p>El SQL</p></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(:sql (ds-pokemons @lab/system))</code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure printed-clojure">"SELECT pokedex_number, name, height_m, weight_kg, generation, is_legendary from `luum-413618.pokemons.pokemons`"
 </code></pre></div></div><div style="margin:15px;"><div><p>Usando el SQL para obtener un dataset</p></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(delay
   (-&gt; (bq/query @lab/system (:sql (ds-pokemons @lab/system)) {:dry-run true})
@@ -228,21 +140,15 @@
  :google.bigquery.job.stats/partitions-processed nil,
  :google.bigquery.job.stats/total-processed 39308,
  :google.bigquery.job.stats/total-billed 0,
- :google.bigquery.job.stats/creation-time 1712264866841,
+ :google.bigquery.job.stats/creation-time 1712265987105,
  :google.bigquery.job.stats/start-time nil,
  :google.bigquery.job.stats/end-time nil}
 </code></pre></div></div><div style="margin:15px;"><div><p>Este query va procesar 29 MB de datos.</p></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(ds-combats @lab/system)</code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure printed-clojure">{:name "combats",
  :sql
  "SELECT First_pokemon, Second_pokemon, Winner from `luum-413618.pokemons.combats`"}
-</code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(bq/schema @lab/system bq-dataset "combats")</code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure printed-clojure">({:name "First_pokemon",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "Second_pokemon",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]}
- {:name "Winner",
-  :type
-  #object[com.google.cloud.bigquery.LegacySQLTypeName 0x7d512691 "INTEGER"]})
+</code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(bq/schema @lab/system bq-dataset "combats")</code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure printed-clojure">({:name "First_pokemon", :type "INTEGER"}
+ {:name "Second_pokemon", :type "INTEGER"}
+ {:name "Winner", :type "INTEGER"})
 </code></pre></div></div><div style="margin:15px;"><div><h3 id="3-pokemones-mas-altos">3 pokemones mas altos</h3><p>Save a cleaned up version of pokemon, keeping just the columns we need (If the last form is uncommented, then write the result to a file.)</p><ul><li><p>Wailord and Celesteela are the tallest Pokemeons.</p></li></ul></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(def pokemons (lf/fetch ds-pokemons @lab/system))</code></pre></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(-&gt; pokemons
     (tc/order-by [:height_m] :desc)
     (tc/head 3))</code></pre></div></div><div style="margin:15px;"><div><p>_unnamed [3 6]:</p><table class="table"><thead><tr><th>:pokedex_number</th><th>:name</th><th style="text-align:right;">:height_m</th><th style="text-align:right;">:weight_kg</th><th>:generation</th><th>:is_legendary</th></tr></thead><tbody><tr><td>321</td><td>Wailord</td><td style="text-align:right;">14.5</td><td style="text-align:right;">398.0</td><td>3</td><td>0</td></tr><tr><td>208</td><td>Steelix</td><td style="text-align:right;">9.2</td><td style="text-align:right;">400.0</td><td>2</td><td>0</td></tr><tr><td>797</td><td>Celesteela</td><td style="text-align:right;">9.2</td><td style="text-align:right;">999.9</td><td>7</td><td>1</td></tr></tbody></table></div></div><div style="margin:15px;"><div><h3 id="total-pokemons">Total pokemons</h3><ul><li><p>There are 801 pokemons total.</p></li></ul></div></div><div style="margin:15px;"><div><pre><code class="sourceCode language-clojure source-clojure bg-light">(-&gt; pokemons

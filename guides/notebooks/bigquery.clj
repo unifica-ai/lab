@@ -16,16 +16,16 @@ logo
 
 (lab/start!)
 
-;; El laboratorio de Unifica se conecta a BigQuery, que utilizamos
-;; para alojar data de clientes.
+;; El laboratorio de Unifica se conecta a BigQuery, que utilizamos para alojar
+;; data de clientes.
 ;;
 ;; Cada cliente tiene su proyecto de GCP, que está guardado en `@lab/system` y
 ;; se usa para todas las operaciones de ese cliente.
 ;;
 ;; ## Prerequisitos
 ;;
-;; Para conectar al data warehouse, es encesario crear un service account
-;; en GCP con accesos específicos. Contactar a Kyle.
+;; Para conectar al data warehouse, es encesario crear un service account en GCP
+;; con accesos específicos. Contactar a Kyle.
 ;;
 ;; ## Correr un query
 ;;
@@ -40,12 +40,18 @@ logo
 
 ;; ## Cual Pokemon es Huesos?
 
+;; Huesos es mi perro. Tenemos una base de datos de Pokemons que bajamos de
+;; Kaggle, y queremos averiguar cuál Pokemon es.
+
 ^{:kindly/hide-code true
   :kindly/kind :kind/hiccup}
 [:img {:src "notebooks/img/huesos.jpg"
        :style {:width "200px"}}]
 
-;; Adaptado de esta [presentacion][talk]
+;; Huesos es el Pokemon con igual altura y peso, y que también ha ganado la
+;; mayor cantidad de batallas contra otros pokemones.
+
+;; Esta sección fue adaptada de esta [presentacion][talk].
 ;;
 ;; [talk]: https://github.com/ladymeyy/tablecloth-talks-and-workshop/tree/main
 ;;
