@@ -3,6 +3,8 @@
 
 logo
 
+;; # Let
+
 (ns let)
 
 ;; Con 'let', podemos declarar una lista de valores para reutilizar más

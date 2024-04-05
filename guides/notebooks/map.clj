@@ -3,10 +3,10 @@
 
 logo
 
+;; # Mapas
+
 (ns map)
 
-;; # Mapas
-;;
 ;; Ver [libro][libro]
 ;;
 ;; [libro]: https://www.braveclojure.com/do-things/
