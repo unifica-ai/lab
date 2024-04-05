@@ -92,7 +92,9 @@
 
 (defn tbl [{:gcloud/keys [project-id]} ds name] (str/join "." [project-id ds name]))
 
-(defn schema [{:gcloud/keys [project-id] :as ctx} ds name]
+(defn schema
+  "Return table schema for a dataset and table name. The project ID is obtained from the context."
+  [{:gcloud/keys [project-id] :as ctx} ds name]
   (with-service ctx
     (fn [service]
       (let [tid (TableId/of project-id ds name)

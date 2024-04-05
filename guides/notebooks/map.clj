@@ -26,7 +26,7 @@ logo
 
 ;; Podemos guardar este mapa en una variable
 
-(def map {
+(def mapa {
  "perro" "Mamífero carnívoro doméstico..."
  "gato" "Mamífero felino de tamaño generalmente pequeño..."
  })
@@ -35,11 +35,11 @@ logo
 ;;
 ;; Y luego retirar solo un valor
 
-(get map "perro")
+(get mapa "perro")
 
 ;; o simplemente
 
-(map "perro")
+(mapa "perro")
 
 ;; En conclusion, un mapa es algo que podemos usar para tener mas de un valor en una variable.
 ;;
@@ -47,18 +47,18 @@ logo
 
 ;; En general, se usan keywords (ver misma pagina en Brave and True) para los **keys**:
 
-(def map2 {
+(def mapa2 {
  :perro "Mamífero carnívoro doméstico..."
  :gato "Mamífero felino de tamaño generalmente pequeño..."
  })
 
 ;; Entonce podemos retirar un valor asi
 
-(map2 :perro)
+(mapa2 :perro)
 
 ;; pero tambien asi!
 
-(:perro map2)
+(:perro mapa2)
 
 ;; Esto segundo se usa muy frecuentemente, y vale la pena aprenderlo.
 
