@@ -1,4 +1,9 @@
-(ns funcs.map)
+^:kindly/hide-code
+(require '[ai.unifica.lab.notebooks :refer [logo]])
+
+logo
+
+(ns map)
 
 ;; # Mapas
 ;;

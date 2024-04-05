@@ -1,11 +1,13 @@
-(ns lab
-  (:require
-   [guides.lab :as lab]
-   [ai.unifica.lab.notebooks :refer [md logo]]))
+^:kindly/hide-code
+(require '[ai.unifica.lab.notebooks :refer [logo]])
 
 logo
 
-(md "# Lab")
+;; # Lab
+
+(ns lab
+  (:require
+   [guides.lab :as lab]))
 
 ;; La función `lab/start` carga los componentes que se han definido.
 

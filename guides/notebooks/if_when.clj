@@ -1,7 +1,11 @@
-(ns funcs.if-when)
+^:kindly/hide-code
+(require '[ai.unifica.lab.notebooks :refer [logo]])
 
+logo
 
 ;; # If y when
+
+(ns if-when)
 
 ;; Ver [libro][libro] o la documentacion [oficial][if]
 ;;

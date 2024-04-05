@@ -1,7 +1,13 @@
-(ns funcs)
+^:kindly/hide-code
+(require '[ai.unifica.lab.notebooks :refer [logo]])
+
+logo
 
 ;; # Funciones
 
+;; [Back to index](https://unifica-lab.pages.dev)
+
+(ns funcs)
 
 (def color "rojo")
 
@@ -14,13 +20,12 @@ color
 
 (str "a" "b" 3)
 
-(+ 1 2 3 1 3  6 7)
+(+ 1 2 3 1 3 6 7)
 
 ;; Cuando llamamos la funcion, saluda
 
 (delay
   (hola))
-
 
 ;; ## Un argumento
 ;;
