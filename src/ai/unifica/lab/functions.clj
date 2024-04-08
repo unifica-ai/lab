@@ -1,8 +1,7 @@
 (ns ai.unifica.lab.functions
   (:require
    [ai.unifica.gcloud.bigquery :as bq]
-   [clojure.core.protocols :as p]
-   [tablecloth.api :as tc]))
+   [clojure.core.protocols :as p]))
 
 (defn fetch
   "Fetch a dataset from BigQuery and transform it to a dataset"

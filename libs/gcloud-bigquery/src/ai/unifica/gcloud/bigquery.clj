@@ -58,11 +58,6 @@
            (.query service query-config opts)))))))
 
 
-(defn table-info
-  "Get table info"
-  [dataset tbl]
-  )
-
 ;; Dataset location: https://msi.nga.mil/api/publications/download?type=view&key=16920959/SFH00000/UpdatedPub150.csv
 ;; (def res (query (str "SELECT * FROM unifica-ai.notebooks.test LIMIT 10")))
 
@@ -129,7 +124,7 @@
 
 (defn load
   "Loads a dataset + table from a gs:// uri, with an explicit schema"
-  [ctx ds tbl uri schema]
+  [ctx ds tbl uri sch]
   (with-service ctx
     (fn [service]
       (let [opts (-> (CsvOptions/newBuilder)
@@ -138,7 +133,7 @@
             tid (TableId/of ds tbl)
             config
             (-> (LoadJobConfiguration/newBuilder tid uri opts)
-                (.setSchema schema)
+                (.setSchema (-schema sch))
                 .build)
             info (JobInfo/of config)
             create-opts (into-array BigQuery$JobOption [])
