@@ -113,14 +113,16 @@
 (defn -schema
   [m]
   (let [types {"STRING" StandardSQLTypeName/STRING
+               "DECIMAL" StandardSQLTypeName/NUMERIC
+               "FLOAT" StandardSQLTypeName/FLOAT64
                "NUMERIC" StandardSQLTypeName/NUMERIC
                "INTEGER" StandardSQLTypeName/INT64
                "DATE" StandardSQLTypeName/DATE}
-        fs (map #(Field/of (:name %) (get types (:type %)) (into-array Field [])) m)]
+        fs (map #(Field/of (:name %) (get types (:type %) "STRING") (into-array Field [])) m)]
     (Schema/of (into-array Field fs))))
 
 (comment
-  (-schema [{:name "foo" :type "STRING"}]))
+  (-schema [{:name "foo" :type "DECIMAL"}]))
 
 (defn load
   "Loads a dataset + table from a gs:// uri, with an explicit schema"
