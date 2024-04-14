@@ -75,6 +75,17 @@
 (defn- ssh-run [{:keys [lab.tasks/server]} & args]
   (apply shell "ssh" (str "root@" server) args))
 
+
+(defn- ssh-run-as-app
+  "Runs a command as the app user"
+  [{:keys [lab.tasks/server]} & args]
+  (apply shell "ssh" (str "app@" server) args))
+
+(defn prepare-deps
+  "Prepares project dependencies"
+  []
+  (ssh-run-as-app @config "clj -X:deps prep"))
+
 (defn restart
   "Restarts the app processs via `systemctl restart app` (on the server)."
   []
@@ -95,6 +106,7 @@
   []
   (with-ssh-agent @config
     (push-files @config)
+    (run-task "prepare-deps")
     (run-task "restart")))
 
 (defn prod-repl
