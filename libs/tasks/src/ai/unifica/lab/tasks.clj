@@ -125,6 +125,7 @@
 
 (def tasks
   {"deploy" #'deploy
+   "prepare-deps" #'prepare-deps
    "restart" #'restart
    "logs" #'logs
    "prod-repl" #'prod-repl
