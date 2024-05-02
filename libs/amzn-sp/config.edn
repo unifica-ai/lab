@@ -1,5 +1,4 @@
-{
- :amzn-sp/client-id #lab/env AMZN_SP_API_CLIENT_ID
+{:amzn-sp/client-id #lab/env AMZN_SP_API_CLIENT_ID
  :amzn-sp/client-secret #lab/secret AMZN_SP_API_CLIENT_SECRET
  :amzn-sp/refresh-token #lab/secret AMZN_SP_API_REFRESH_TOKEN
  :amzn-sp/endpoint #or [#lab/env AMZN_SP_API_ENDPOINT "https://sellingpartnerapi-na.amazon.com"]

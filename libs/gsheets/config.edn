@@ -1,0 +1,5 @@
+{:gsheets/application-name #or [#lab/env GSHEETS_APPLICATION_NAME "Unifica Lab"]
+ :gsheets/access-type "offline"
+ :gsheets/port #or [#lab/env GSHEETS_PORT 8888]
+ :gsheets/authorize "user"
+  }
