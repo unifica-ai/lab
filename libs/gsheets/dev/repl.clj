@@ -9,5 +9,5 @@
           :gsheets/port 8888
           :gsheets/authorize "user"})))
 
-(let [service (:gsheets/google-service @ctx)]
- (sheets-v4/get-values service "1-qOXNscq19EeGYAgYXD55CRUPxgeKYh9Yc_SpcwSP-8" "Sheet1!A2:E"))
+(delay
+  (sheets-v4/get-values @ctx "1-qOXNscq19EeGYAgYXD55CRUPxgeKYh9Yc_SpcwSP-8" "Sheet1!A2:E"))

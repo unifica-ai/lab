@@ -14,7 +14,7 @@
       .build))
 
 (defn get-values
-  [^Sheets gservice id]
+  [{^Sheets gservice :gsheets/google-service} id range]
   (let [^ValueRange response (-> gservice
                                  .spreadsheets
                                  .values
